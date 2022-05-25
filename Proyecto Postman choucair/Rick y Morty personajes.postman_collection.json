@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "ad899fa0-a1c0-4d04-8e59-f6a8fd328a3e",
+		"name": "Rick y Morty personajes",
+		"description": "Ésta es la colección para interactuar con la API de Rick and Morty",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Personajes",
+			"item": [
+				{
+					"name": "Obtener todos los personajes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://rickandmortyapi.com/api/character/",
+							"protocol": "https",
+							"host": [
+								"rickandmortyapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"character",
+								""
+							]
+						},
+						"description": "Esta petición devolverá todos los personajes de Rick and Morty"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un personaje",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Nombre del personaje\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(pm.environment.get(\"expectedName\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"// Reused values\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"name\", \"jsonData.name\");\r",
+									"pm.environment.set(\"species\", \"jsonData.species\");\r",
+									"pm.environment.set(\"gender\", \"jsonData.gender\");\r",
+									"pm.environment.set(\"status\", \"jsonData.status\");\r",
+									"pm.environment.set(\"type\", \"jsonData.type\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://rickandmortyapi.com/api/character/{{id_personaje}}",
+							"protocol": "https",
+							"host": [
+								"rickandmortyapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"character",
+								"{{id_personaje}}"
+							]
+						},
+						"description": "Esta petición devolverá un único personaje de Rick and Morty, indicando el parámetro `id`"
+					},
+					"response": []
+				},
+				{
+					"name": "Filtro por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://rickandmortyapi.com/api/character/2\n",
+							"protocol": "https",
+							"host": [
+								"rickandmortyapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"character",
+								"2\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtro por paginación",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://rickandmortyapi.com/api/character/?page=19\n",
+							"protocol": "https",
+							"host": [
+								"rickandmortyapi",
+								"com"
+							],
+							"path": [
+								"api",
+								"character",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "19\n"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Diferentes Id,s o este vacio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Licaciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			],
+			"description": "# Documentación de Personajes\r\nEsta es la documentación no oficial para describir la colleción del módulo de personajes de la API de Rick and Morty"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
